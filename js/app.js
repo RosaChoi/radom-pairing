@@ -34,17 +34,15 @@ var picks = [];
 
 
 $(document).ready(function(){
-  if (names.length % 2 != 0) {
-      alert("You must have an even number of names. You currently have " + names.length + " names.");
-  }
   radomizeClicked();
-  shuffle(names);
 });
 
 function radomizeClicked() {
   $('#randomize').on('click', function(){
-    console.log('clicked!')
-    for(var k=0; k < picks.length; k+=2){
+    picks = [];
+    $('#pairingList').empty();
+    shuffle(names);
+    for(var k=0; k < picks.length; k++){
       $('#pairingList').append('<li>'+ picks[k]+'</li>');
     }
   });
@@ -52,7 +50,7 @@ function radomizeClicked() {
 
 
 function shuffle(array) {
-  for( var i = 0; i < names.length; i++){
+  for( var i = 0; i < names.length; i+=2){
     var random = Math.floor(Math.random()*names.length);
 
     if(names[random] === names[i]) {
@@ -63,7 +61,6 @@ function shuffle(array) {
         picks.push(names[i] + " gets " + names[random]);
         used.push(names[random]);
     }
-
   }
 
 }
