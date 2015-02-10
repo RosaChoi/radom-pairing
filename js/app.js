@@ -44,8 +44,10 @@ $(document).ready(function(){
 function radomizeClicked() {
   $('#randomize').on('click', function(){
     console.log('clicked!')
-    $('#pairingList').append('<li>'+picks+'</li>');
-  })
+    for(var k=0; k < picks.length; k+=2){
+      $('#pairingList').append('<li>'+ picks[k]+'</li>');
+    }
+  });
 }
 
 
@@ -53,7 +55,7 @@ function shuffle(array) {
   for( var i = 0; i < names.length; i++){
     var random = Math.floor(Math.random()*names.length);
 
-    if(names[random] == names[i]) {
+    if(names[random] === names[i]) {
         names[random] = names[random++];
         picks.push(names[i] + " gets " + names[random]);
         used.push(names[random]);
