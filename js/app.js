@@ -26,41 +26,50 @@ var names = [
   "Helen Lam",
   "Cameron Irmas",
   "Victoria Billingsley",
-  "Rosa Choi"
+  "Rosa Choi",
 ];
 
-var used = [];
-var picks = [];
-
-
 $(document).ready(function(){
-  radomizeClicked();
+  $('#randomize').on('click', radomizeButtonClicked);
 });
 
-function radomizeClicked() {
-  $('#randomize').on('click', function(){
-    picks = [];
-    $('#pairingList').empty();
-    shuffle(names);
-    for(var k=0; k < picks.length; k++){
-      $('#pairingList').append('<li>'+ picks[k]+'</li>');
+function radomizeButtonClicked() {
+  $('#pairingList').empty();
+  shuffleStudents = shuffle(names);
+      pairs = pair(names);
+  for(var k=0; k < (shuffleStudents.length)/2; k++){
+    // $('#pairingList').append('<li>'+ pairs[k][0]+ " and "+ pairs[k][1]+'</li>');
+
+    var source = $("#gStudentsList").html();
+    var template = Handlebars.compile(source);
+    var context = {
+      student_one_name: pairs[k][0],
+      student_two_name: pairs[k][1],
     }
-  });
+    var html = template(context);
+    $('#pairingList').append(html);
+  }
 }
 
-
 function shuffle(array) {
-  for( var i = 0; i < names.length; i+=2){
-    var random = Math.floor(Math.random()*names.length);
+  var temp;
 
-    if(names[random] === names[i]) {
-        names[random] = names[random++];
-        picks.push(names[i] + " gets " + names[random]);
-        used.push(names[random]);
-    } else {
-        picks.push(names[i] + " gets " + names[random]);
-        used.push(names[random]);
-    }
+  for( var i = 0; i < array.length; i++) {
+    var random = Math.floor(Math.random()*array.length);
+
+    temp = array[random];
+    array[random] = array[i];
+    array[i] = temp
   }
+  return array
+}
 
+function pair(array) {
+  var pairs = [];
+
+  for (var i = 0, j = 2; j <= array.length; i = i + 2 , j = j + 2) {
+    var pair = array.slice(i, j);
+    pairs.push(pair);
+  }
+  return pairs
 }

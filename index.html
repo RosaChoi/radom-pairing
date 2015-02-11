@@ -7,18 +7,25 @@
   <body>
     <nav class="navbar navbar-inverse">
       <div class="container">
-        <button id="randomize"type="button" class="btn btn-info navbar-btn navbar-right">Randomize</button>
+        <p class="nav navbar-brand">
+          gSchool Pairing App
+        </p>
       </div>
     </nav>
 
     <div class="container">
+      <button id="randomize"type="button" class="btn btn-success navbar-btn navbar-right">Randomize</button>
       <h1>g5 Random Pairing</h1>
-      <ul id="pairingList">
-
+      <ul id="pairingList" class="list-unstyled col-sm-6">
       </ul>
     </div>
 
+    <script type="text/x-handlebars-template" id="gStudentsList" >
+      <li>{{student_one_name}} and {{student_two_name}}</li>
+    </script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="js/handlebars-v3.0.0.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
   </body>
 </html>
